@@ -33,7 +33,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var resolve_path = require('./core').resolve_path;
+var resolve_path = require('./gallery').resolve_path;
 
 app.get(/^\/index\/(.*)/, resolve_path, routes.index);
 app.get(/^\/image\/(.*)/, resolve_path, routes.image);

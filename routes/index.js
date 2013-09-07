@@ -6,6 +6,7 @@
 var fs = require('fs');
 var mime = require('mime');
 var path = require('path');
+var gallery = require('../gallery');
 
 exports.index = function(req, res){
   var abs_path = req.abs_path;
@@ -15,32 +16,20 @@ exports.index = function(req, res){
   if (!fs.lstatSync(abs_path).isDirectory()) {
     return res.send(404);
   }
-  fs.readdir(abs_path, function(err, names) {
-    names = names.filter(function(fn) {
-      return !fn.match(/^\./);
-    });
-    var dirs = names.filter(function(fn) {
-      return fs.lstatSync(abs_path + '/' + fn).isDirectory();
-    });
-    var files = names.filter(function(fn) {
-      return fs.lstatSync(abs_path + '/' + fn).isFile();
-    });
-    for(var i=0; i < dirs.length; ++i){
-      var inames = fs.readdirSync(abs_path + '/' + dirs[i]);
-      inames = inames.filter(function(fn) {
-        return fs.lstatSync(abs_path + '/' + dirs[i] + '/' + fn).isFile();
-      });
-      dirs[i] = {
-        name: dirs[i],
-        contents: inames
-      };
-    }
-    res.render('index', {
-      title: 'Browse ' + req.params[0],
-      rel_path: req.params[0],
-      dirs: dirs,
-      files: files
-    });
+  var folders = gallery.listFolders(abs_path);
+  var images = gallery.listImages(abs_path);
+  for(var i=0; i < folders.length; ++i){
+    var iimages = gallery.listImages(abs_path + '/' + folders[i]);
+    folders[i] = {
+      name: folders[i],
+      contents: iimages
+    };
+  }
+  res.render('index', {
+    title: 'Browse ' + req.params[0],
+    rel_path: req.params[0],
+    dirs: folders,
+    files: images
   });
 };
 

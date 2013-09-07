@@ -25,16 +25,15 @@
       <% console.log(dirs); %>
       <% for(var i=0; i < dirs.length; i++) { var fn = dirs[i].name; %>
       <li>
+        <!-- <img src="/images/folder_background.png" class="folder_background"/>
+        <img src="/images/folder_foreground.png" class="folder_foreground"/> -->
         <a href="<%= fn %>/">
           <ul class="folder_inside" id="item_<%= fn %>">
           <% for(var j=0; j < dirs[i].contents.length; j++) { var ifn = dirs[i].contents[j]; %>
             <% if (j > 2) break; %>
             <li>
             <img src="/preview/<%= rel_path %><%= fn %>/<%= ifn %>"/>
-            </li>
-          <% } %>
-          </ul>
-          <%= fn %>/
+            </li><% } %></ul><br /><%= fn %>/
         </a>
       </li>
       <% } %>

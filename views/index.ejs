@@ -5,10 +5,48 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
     <div>
-      <%= listing %>
+      <ul class="breadcrumb">
+      <li>
+        <a href="/index/">Home</a>
+      </li>
+      <%
+        var rel_path_parts = rel_path.split(/\//);
+        for(var i=0; i < rel_path_parts.length-1; i++) {
+          var fn = rel_path_parts[i];
+          var rpath = rel_path_parts.slice(0,i+1).join('/');
+      %>
+      <li>
+        <a href="/index/<%= rpath %>/"><%= fn %></a>
+      </li>
+      <% } %>
+      </ul>
+      <ul class="folder_contents">
+      <% console.log(dirs); %>
+      <% for(var i=0; i < dirs.length; i++) { var fn = dirs[i].name; %>
+      <li>
+        <a href="<%= fn %>/">
+          <ul class="folder_inside" id="item_<%= fn %>">
+          <% for(var j=0; j < dirs[i].contents.length; j++) { var ifn = dirs[i].contents[j]; %>
+            <% if (j > 2) break; %>
+            <li>
+            <img src="/preview/<%= rel_path %><%= fn %>/<%= ifn %>"/>
+            </li>
+          <% } %>
+          </ul>
+          <%= fn %>/
+        </a>
+      </li>
+      <% } %>
+      <% for(var i=0; i < files.length; i++) { var fn = files[i]; %>
+      <li>
+        <a href="/image/<%= rel_path %><%= fn %>">
+          <img src="/preview/<%= rel_path %><%= fn %>" alt="<%= fn %>" title="<%= fn %>" id="item_<%= fn %>"/>
+          <%= fn %>
+        </a>
+      </li>
+      <% } %>
+      </ul>
     </div>
   </body>
 </html>

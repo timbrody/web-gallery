@@ -1,5 +1,98 @@
 body
-  padding: 50px
+  padding: 10px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 a
   color: #00B7FF
+.breadcrumb
+  list-style: none
+  overflow: hidden
+  font: 18px;
+  margin: 20px 0
+  padding: 0
+.breadcrumb li
+  float: left
+.breadcrumb li a
+  color: white;
+  text-decoration: none
+  padding: 10px 0 10px 45px
+  background: brown
+  background: hsla(34,85%,35%,1)
+  position: relative
+  display: block
+  float: left
+.breadcrumb li a:after
+  content: " "
+  display: block
+  width: 0
+  height: 0
+  border-top: 50px solid transparent
+  border-bottom: 50px solid transparent
+  border-left: 30px solid hsla(34,85%,35%,1)
+  position: absolute
+  top: 50%
+  margin-top: -50px
+  left: 100%
+  z-index: 2
+.breadcrumb li a:before
+  content: " "
+  display: block
+  width: 0
+  height: 0
+  border-top: 50px solid transparent
+  border-bottom: 50px solid transparent
+  border-left: 30px solid white
+  position: absolute
+  top: 50%
+  margin-top: -50px
+  left: 100%
+  z-index: 1
+.breadcrumb li:last-child a
+  background: transparent !important
+  color: black
+  pointer-events: none
+  cursor: default
+.breadcrumb li:last-child a:after
+  border: none
+.breadcrumb li:first-child a
+  padding-left: 10px
+.breadcrumb li a:hover
+  background: hsla(34,85%,25%,1)
+.breadcrumb li a:hover:after
+  border-left-color: hsla(34,85%,25%,1) !important
+.folder_contents
+  width: 100%
+  list-style: none
+  margin: 0
+  padding: 0
+.folder_contents li
+  float: left
+  width: 200px
+  height: 200px
+  margin: 0
+  padding: 0
+  text-align: center
+  display: block
+  position: relative
+.folder_contents li a
+  display: block
+  margin: auto auto 0 auto
+  position: absolute
+  bottom: 0
+  width: 200px
+.folder_inside
+  position: absolute
+  list-style: none
+  margin: -180px 0 0 0
+  padding: 0
+.folder_inside li
+  position: absolute
+  overflow: hidden
+.folder_inside li:nth-child(1)
+  transform: rotate(7deg) scale(.8,.8)
+  -webkit-transform: rotate(7deg) scale(.8,.8)
+.folder_inside li:nth-child(2)
+  transform: rotate(15deg) scale(.8,.8)
+  -webkit-transform: rotate(15deg) scale(.8,.8)
+.folder_inside li:nth-child(3)
+  transform: rotate(24deg) scale(.8,.8)
+  -webkit-transform: rotate(24deg) scale(.8,.8)

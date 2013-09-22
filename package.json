@@ -6,6 +6,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "daemonize2": "*",
     "mime": "*",
     "express": "3.3.8",
     "ejs": "*",

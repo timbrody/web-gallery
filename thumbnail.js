@@ -35,8 +35,7 @@ exports.generate = function(req, res, next){
     fs.mkdirSync(previews_dir);
   }
 
-  var spawn = require('child_process').spawn;
-  var convert = spawn('convert', [
+  var args = [
     '-define',
     'jpeg:size=480x360',
     src,
@@ -46,13 +45,19 @@ exports.generate = function(req, res, next){
     '-unsharp',
     '0x.5',
     tgt
-  ]);
+  ];
+
+  var spawn = require('child_process').spawn;
+  var convert = spawn('convert', args);
 
   convert.stderr.on('data', function(data){
     console.log('convert stderr: ' + data);
   });
 
   convert.on('close', function (code) {
+    if (code !== 0) {
+      console.log('convert ' + args.join(' '));
+    }
     req.preview_abs_path = tgt;
     next();
   });

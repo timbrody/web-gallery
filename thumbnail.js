@@ -33,6 +33,7 @@ exports.generate = function(req, res, next){
 
   if (!fs.existsSync(previews_dir)) {
     fs.mkdirSync(previews_dir);
+    fs.chmodSync(previews_dir, 0775);
   }
 
   var args = [
